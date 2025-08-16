@@ -1,0 +1,334 @@
+/* TaskList Component Styles */
+
+.task-list {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.task-list__items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  flex: 1;
+}
+
+/* Empty State Styles */
+.task-list--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 300px;
+  padding: var(--space-xl);
+}
+
+.task-list__empty-state {
+  width: 100%;
+  max-width: 500px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-xl);
+  background: var(--color-gray-50);
+  border: 3px dashed var(--color-gray-300);
+  border-radius: var(--radius-xl);
+  transition: all 0.2s ease;
+}
+
+.empty-state:hover {
+  border-color: var(--color-gray-400);
+  background: var(--color-gray-100);
+  transform: translateY(-2px);
+}
+
+.empty-state__icon {
+  font-size: clamp(3rem, 4vw, 4rem);
+  margin-bottom: var(--space-lg);
+  display: block;
+  opacity: 0.6;
+  color: var(--color-gray-400);
+}
+
+.empty-state__title {
+  margin: 0 0 var(--space-md) 0;
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-gray-700);
+  line-height: 1.2;
+}
+
+.empty-state__message {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  color: var(--color-gray-500);
+  line-height: 1.6;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Mobile-first responsive design */
+
+/* Small screens (default) */
+.task-list--empty {
+  min-height: 250px;
+  padding: var(--space-lg);
+}
+
+.empty-state {
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+.empty-state__icon {
+  margin-bottom: var(--space-md);
+}
+
+.empty-state__title {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-sm);
+}
+
+.empty-state__message {
+  font-size: var(--font-size-base);
+}
+
+/* Medium screens (tablets) */
+@media (min-width: 768px) {
+  .task-list--empty {
+    min-height: 350px;
+    padding: var(--space-xl);
+  }
+  
+  .empty-state {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+  
+  .empty-state__icon {
+    margin-bottom: var(--space-lg);
+  }
+  
+  .empty-state__title {
+    margin-bottom: var(--space-md);
+  }
+}
+
+/* Large screens (desktops) */
+@media (min-width: 1024px) {
+  .task-list--empty {
+    min-height: 400px;
+    padding: var(--space-2xl);
+  }
+  
+  .task-list__items {
+    gap: var(--space-lg);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .empty-state {
+    border-width: 3px;
+    border-color: #6b7280;
+  }
+  
+  .empty-state:hover {
+    border-color: #374151;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .empty-state {
+    transition: none;
+  }
+}
+
+/* Focus styles for accessibility */
+.task-list:focus-within .empty-state {
+  border-color: #3b82f6;
+  background: #f0f9ff;
+}
+
+/* Loading state (for future use) */
+.task-list--loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 40px 20px;
+}
+
+.task-list__loading {
+  text-align: center;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+/* Animation for task items appearing */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.task-list__items > li {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .task-list__items > li {
+    animation: none;
+  }
+}/* En
+hanced accessibility styles */
+
+/* Focus management for task list */
+.task-list:focus-within {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+  border-radius: var(--radius-lg);
+}
+
+/* Screen reader improvements */
+.task-list[aria-busy="true"]::before {
+  content: 'Loading tasks...';
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Empty state accessibility */
+.empty-state {
+  cursor: default;
+}
+
+.empty-state:focus {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 4px;
+}
+
+/* List navigation improvements */
+.task-list__items {
+  counter-reset: task-counter;
+}
+
+.task-list__items > li {
+  counter-increment: task-counter;
+  position: relative;
+}
+
+.task-list__items > li::before {
+  content: 'Task ' counter(task-counter) ' of ' attr(data-total) ': ';
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Keyboard navigation hints */
+.task-list::after {
+  content: 'Use Tab to navigate between tasks, Enter to edit, Delete key to remove';
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* High contrast mode enhancements */
+@media (prefers-contrast: high) {
+  .task-list:focus-within {
+    outline-width: 4px;
+    outline-color: var(--color-gray-900);
+  }
+  
+  .empty-state {
+    border-width: 4px;
+    border-color: var(--color-gray-600);
+  }
+  
+  .empty-state:hover,
+  .empty-state:focus {
+    border-color: var(--color-gray-900);
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .empty-state {
+    transition: none;
+    transform: none;
+  }
+  
+  .empty-state:hover {
+    transform: none;
+  }
+  
+  .task-list__items > li {
+    animation: none;
+  }
+}
+
+/* Touch accessibility */
+@media (pointer: coarse) {
+  .empty-state {
+    padding: var(--space-3xl) var(--space-xl);
+    min-height: 200px;
+  }
+  
+  .empty-state__icon {
+    font-size: clamp(3.5rem, 5vw, 5rem);
+  }
+}
+
+/* Loading state accessibility */
+.task-list--loading {
+  position: relative;
+}
+
+.task-list--loading::before {
+  content: 'Loading your tasks, please wait...';
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.task-list__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.task-list__loading::before {
+  content: '⏳';
+  font-size: var(--font-size-xl);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .task-list__loading::before {
+    animation: none;
+  }
+}

@@ -1,0 +1,317 @@
+/* AddTaskForm Component Styles */
+
+.add-task-form {
+  background: white;
+  padding: var(--space-xl);
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+}
+
+.add-task-form:focus-within {
+  /* Focus styling handled by parent container */
+}
+
+.add-task-form__title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-gray-900);
+  margin: 0 0 var(--space-lg) 0;
+  text-align: center;
+}
+
+.add-task-form__fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field--submit {
+  justify-content: end;
+}
+
+.form-field__label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-gray-700);
+  margin-bottom: var(--space-sm);
+  display: block;
+}
+
+.form-field__input,
+.form-field__select {
+  width: 100%;
+  padding: var(--space-md);
+  border: 2px solid var(--color-gray-300);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  background: white;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  min-height: var(--touch-target-min);
+  line-height: 1.5;
+}
+
+.form-field__input:focus,
+.form-field__select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--focus-ring);
+}
+
+.form-field__input--error {
+  border-color: var(--color-danger);
+}
+
+.form-field__input--error:focus {
+  border-color: var(--color-danger);
+  box-shadow: var(--focus-ring-danger);
+}
+
+.form-field__error {
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+  margin-top: var(--space-sm);
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md) var(--space-lg);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  min-height: var(--touch-target-min);
+  line-height: 1;
+  position: relative;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.add-task-form__help {
+  margin-top: var(--space-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.add-task-form__actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+}
+
+/* Mobile-first responsive design */
+
+/* Small screens (default) - single column layout */
+.add-task-form__fields {
+  grid-template-columns: 1fr;
+}
+
+.add-task-form__actions .btn {
+  flex: 1;
+  min-width: 120px;
+}
+
+/* Medium screens (tablets) - improved spacing */
+@media (min-width: 768px) {
+  .add-task-form {
+    padding: var(--space-2xl);
+  }
+  
+  .add-task-form__fields {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-xl);
+    align-items: end;
+  }
+  
+  .form-field--priority {
+    grid-column: 1 / -1;
+  }
+  
+  .add-task-form__actions {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+  }
+  
+  .add-task-form__actions .btn {
+    flex: 0 0 auto;
+    min-width: 140px;
+  }
+}
+
+/* Large screens (desktops) - horizontal layout */
+@media (min-width: 1024px) {
+  .add-task-form__fields {
+    grid-template-columns: 1fr 2fr auto;
+    align-items: end;
+  }
+  
+  .form-field--priority {
+    grid-column: auto;
+  }
+  
+  .add-task-form__actions {
+    grid-column: auto;
+    justify-content: flex-start;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .add-task-form {
+    border-width: 2px;
+  }
+  
+  .btn {
+    border-width: 2px;
+  }
+  
+  .form-field__input,
+  .form-field__select {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .form-field__input,
+  .form-field__select,
+  .btn {
+    transition: none;
+  }
+}
+/*
+ Enhanced accessibility styles */
+
+/* Skip link for keyboard users */
+.add-task-form__skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--color-primary);
+  color: white;
+  padding: var(--space-sm) var(--space-md);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  z-index: 1000;
+  transition: top 0.2s ease;
+}
+
+.add-task-form__skip-link:focus {
+  top: 6px;
+}
+
+/* Enhanced focus indicators */
+.form-field__input:focus,
+.form-field__select:focus {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Focus trap for form */
+.add-task-form:focus-within {
+  position: relative;
+}
+
+.add-task-form:focus-within::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-xl);
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* Screen reader improvements */
+.form-field__label::after {
+  content: attr(data-required);
+  color: var(--color-danger);
+  margin-left: var(--space-xs);
+}
+
+.form-field__input[required] + .form-field__label::after,
+.form-field__input[aria-required="true"] + .form-field__label::after {
+  content: " *";
+}
+
+/* High contrast mode enhancements */
+@media (prefers-contrast: high) {
+  .form-field__input:focus,
+  .form-field__select:focus {
+    outline-width: 4px;
+    outline-color: var(--color-gray-900);
+  }
+  
+  .btn:focus {
+    outline: 4px solid var(--color-gray-900);
+    outline-offset: 2px;
+  }
+}
+
+/* Reduced motion for focus transitions */
+@media (prefers-reduced-motion: reduce) {
+  .add-task-form__skip-link {
+    transition: none;
+  }
+  
+  .form-field__input,
+  .form-field__select,
+  .btn {
+    transition: none;
+  }
+}
+
+/* Touch accessibility improvements */
+@media (pointer: coarse) {
+  .form-field__input,
+  .form-field__select,
+  .btn {
+    min-height: 48px; /* Larger touch targets */
+  }
+  
+  .form-field__label {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--space-md);
+  }
+}
